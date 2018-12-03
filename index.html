@@ -1,0 +1,55 @@
+<!DOCTYPE html> <!--This page is only to test Firebase stuff-->
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>LED On/Off</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+</head>
+<body>
+    <button id="on">On</button>
+    <br>
+    <button id="off">Off</button>
+</body>
+
+<!--jQuery-->
+<script src="https://code.jquery.com/jquery.js"></script>
+
+<!--Link to firebase-->
+<script src="https://www.gstatic.com/firebasejs/5.6.0/firebase.js"></script>
+
+<script>
+
+// Initialize Firebase
+var config = {
+    apiKey: "AIzaSyDQefq8pw-Exyooa_N2wh27fzA3v1LV1IE",
+    authDomain: "arduino-control-testing.firebaseapp.com",
+    databaseURL: "https://arduino-control-testing.firebaseio.com",
+    projectId: "arduino-control-testing",
+    storageBucket: "arduino-control-testing.appspot.com",
+    messagingSenderId: "493184510884"
+  };
+firebase.initializeApp(config);
+
+var controlCenter = firebase.database(); //Start database access instance for page
+
+$("#on").click(function(event) {
+    event.preventDefault();
+    var on = true; //Var to set firebase property equal to
+    controlCenter.ref().set({
+        on: on
+    })
+    console.log(controlCenter); //debugging
+})
+
+$("#off").click(function(event) {
+    event.preventDefault();
+    var on = false; //Var to set firebase property equal to
+    controlCenter.ref().set({
+        on: on
+    })
+    console.log(controlCenter); //debugging
+})
+</script>
+</html>
